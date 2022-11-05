@@ -16,18 +16,7 @@
 #define FUN 4
 
 // Combo keys
-#define COMBO_LS_CTRL 13 30
-#define COMBO_LS_ALT 12 30
-#define COMBO_LS_GUI 11 30
-
-#define COMBO_RS_CTRL 16 33
-#define COMBO_RS_ALT 17 33
-#define COMBO_RS_GUI 18 33
-
 #define COMBO_NAV 30 31
-
-// Auto shift
-#define AS(keycode) &as LS(keycode) keycode
 
 &mt {
    // flavor = "tap-preferred";
@@ -36,55 +25,29 @@
 
 / {
     behaviors {
-        as: auto_shift {
+        dk: dual_key {
             compatible = "zmk,behavior-hold-tap";
-            label = "AUTO_SHIFT";
+            label = "DUAL_KEY";
             #binding-cells = <2>;
             tapping_term_ms = <200>;
             quick_tap_ms = <0>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <400>;
+            quick-tap-ms = <150>;
+            flavor = "tap-unless-interrupted";
+            bindings = <&kp>, <&kp>;
+        };
     };
 
     combos {
         compatible = "zmk,combos";
-
-        combo_lctrl {
-            timeout-ms = <50>;
-            key-positions = <COMBO_LS_CTRL>;
-            bindings = <&kp LCTRL>;
-        };
-
-        combo_lalt {
-            timeout-ms = <50>;
-            key-positions = <COMBO_LS_ALT>;
-            bindings = <&kp RALT>;
-        };
-
-        combo_lgui {
-            timeout-ms = <50>;
-            key-positions = <COMBO_LS_GUI>;
-            bindings = <&kp LGUI>;
-        };
-
-        combo_rctrl {
-            timeout-ms = <50>;
-            key-positions = <COMBO_RS_CTRL>;
-            bindings = <&kp LCTRL>;
-        };
-
-        combo_ralt {
-            timeout-ms = <50>;
-            key-positions = <COMBO_RS_ALT>;
-            bindings = <&kp RALT>;
-        };
-
-        combo_rgui {
-            timeout-ms = <50>;
-            key-positions = <COMBO_RS_GUI>;
-            bindings = <&kp LGUI>;
-        };
 
         combo_esc {
             timeout-ms = <50>;
@@ -109,17 +72,17 @@
         compatible = "zmk,keymap";
                 
         // ------------------------------------------------------------------------------------------------------------
-        // |  AS(Q)  |  AS(W)  |  AS(E)  |  AS(R)  |  AS(T)  |      |  AS(Y)  |  AS(U)  |  AS(I)  |  AS(O)  |  AS(P)  |
-        // |  AS(A)  |  AS(S)  |  AS(D)  |  AS(F)  |  AS(G)  |      |  AS(H)  |  AS(J)  |  AS(K)  |  AS(L)  |  AS(;)  |
-        // |  AS(Z)  |  AS(X)  |  AS(C)  |  AS(V)  |  AS(B)  |      |  AS(N)  |  AS(M)  |  AS(,)  |  AS(.)  |  AS(/)  |
+        // |    Q    |    W    |    E    |    R    |    T    |      |    Y    |    U    |    I    |    O    |    P    |
+        // |    A    |    S    |    D    |    F    |    G    |      |    H    |    J    |    K    |    L    |    ;    |
+        // |    Z    |    X    |    C    |    V    |    B    |      |    N    |    M    |    ,    |    .    |    /    |
         //                               |   SYM   |   SPC   |      |  ENTER  |   NUM   |
 
         default_layer {
             bindings = <
-            AS(Q)   AS(W)   AS(E)   AS(R)   AS(T)       AS(Y)       AS(U)   AS(I)       AS(O)   AS(P) 
-            AS(A)   AS(S)   AS(D)   AS(F)   AS(G)       AS(H)       AS(J)   AS(K)       AS(L)   AS(SEMI)
-            AS(Z)   AS(X)   AS(C)   AS(V)   AS(B)       AS(N)       AS(M)   AS(COMMA)   AS(DOT) AS(SLASH)
-                                    &mo SYM &kp SPC     &kp ENTER   &mo NUM
+            &kp Q       &kp W       &kp E       &kp R           &kp T           &kp Y       &kp U           &kp I       &kp O       &kp P
+            &hm LGUI A  &hm RALT S  &hm LCTRL D &hm LSHIFT F    &kp G           &kp H       &hm RSHIFT J    &hm RCTRL K &hm RALT L  &hm RGUI SEMI
+            &kp Z       &kp X       &kp C       &kp V           &kp B           &kp N       &kp M           &kp COMMA   &kp DOT     &kp SLASH
+                                                &mo SYM         &kp SPC         &kp ENTER   &mo NUM
             >;
         };
 
@@ -146,8 +109,8 @@
 
         symbols_layer {
             bindings = <
-            &trans  &trans  &trans  &trans  &trans          &as TILDE GRAVE &kp N2          &kp N7          &kp PIPE        &kp N6
-            &trans  &trans  &trans  &trans  &trans          &as APOS DQT    &as RPAR LPAR   &as RBRC LBRC   &as RBKT LBKT   &as GT LT
+            &trans  &trans  &trans  &trans  &trans          &dk TILDE GRAVE &kp N2          &kp N7          &kp PIPE        &kp N6
+            &trans  &trans  &trans  &trans  &trans          &dk APOS DQT    &dk RPAR LPAR   &dk RBRC LBRC   &dk RBKT LBKT   &dk GT LT
             &trans  &trans  &trans  &trans  &trans          &kp N4          &kp N5          &kp N1          &kp N3          &kp BSLH
                                     &trans  &kp SPC         &kp ENTER       &mo FUN
             >;
