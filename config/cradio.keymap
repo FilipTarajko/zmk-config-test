@@ -22,6 +22,18 @@
 // Combo keys
 #define COMBO_NAV 30 31
 
+// Mod keys
+#define MOD_L_SFT 13
+#define MOD_L_CTL 12
+#define MOD_L_LALT 21
+#define MOD_L_RALT 11
+#define MOD_L_GUI 10
+#define MOD_R_SFT 16
+#define MOD_R_CTL 17
+#define MOD_R_LALT 28
+#define MOD_R_RALT 18
+#define MOD_R_GUI 19
+
 // Halve keys
 #define LEFT_THUMB_KEYS 30 31
 #define RIGHT_THUMB_KEYS 32 33
@@ -73,114 +85,115 @@
         // Left side
         combo_l_shift_ctrl {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <12 13>;
+            key-positions = <MOD_L_CTL MOD_L_SFT>;
             bindings = <&kp LS(LCTRL)>;
         };
 
         combo_l_shift_ralt {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <11 13>;
+            key-positions = <MOD_L_RALT MOD_L_SFT>;
             bindings = <&kp LS(RALT)>;
         };
         
 
         combo_l_shift_lalt {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <21 13>;
+            key-positions = <MOD_L_LALT MOD_L_SFT>;
             bindings = <&kp LS(LALT)>;
         };
         
         combo_l_shift_gui {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <10 13>;
+            key-positions = <MOD_L_GUI MOD_L_SFT>;
             bindings = <&kp LS(LGUI)>;
         };
 
         combo_l_ctrl_ralt {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <11 12>;
+            key-positions = <MOD_L_RALT MOD_L_CTL>;
             bindings = <&kp LC(RALT)>;
         };
 
         combo_l_ctrl_lalt {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <21 12>;
+            key-positions = <MOD_L_LALT MOD_L_CTL>;
             bindings = <&kp LC(LALT)>;
         };
 
         combo_l_ctrl_gui {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <10 12>;
+            key-positions = <MOD_L_GUI MOD_L_CTL>;
             bindings = <&kp LC(LGUI)>;
         };
 
         combo_l_ralt_gui {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <10 11>;
+            key-positions = <MOD_L_GUI MOD_L_RALT>;
             bindings = <&kp RA(LGUI)>;
         };
 
         combo_l_lalt_gui {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <10 21>;
+            key-positions = <MOD_L_GUI MOD_L_LALT>;
             bindings = <&kp LA(LGUI)>;
         };
 
         // Right side
         combo_r_shift_ctrl {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <16 17>;
+            key-positions = <MOD_R_SFT MOD_R_CTL>;
             bindings = <&kp RS(RCTRL)>;
         };
 
         combo_r_shift_ralt {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <16 18>;
+            key-positions = <MOD_R_SFT MOD_R_RALT>;
             bindings = <&kp RS(RALT)>;
         };
 
         combo_r_shift_lalt {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <16 28>;
+            key-positions = <MOD_R_SFT MOD_R_LALT>;
             bindings = <&kp RS(LALT)>;
         };
 
         combo_r_shift_gui {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <16 19>;
+            key-positions = <MOD_R_SFT MOD_R_GUI>;
             bindings = <&kp RS(LGUI)>;
         };
 
         combo_r_ctrl_ralt {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <17 18>;
+            key-positions = <MOD_R_CTL MOD_R_RALT>;
             bindings = <&kp RC(RALT)>;
         };
 
         combo_r_ctrl_lalt {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <17 28>;
+            key-positions = <MOD_R_CTL MOD_R_LALT>;
             bindings = <&kp RC(LALT)>;
         };
 
         combo_r_ctrl_gui {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <17 19>;
+            key-positions = <MOD_R_CTL MOD_R_GUI>;
             bindings = <&kp RC(LGUI)>;
         };
 
         combo_r_ralt_gui {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <18 19>;
+            key-positions = <MOD_R_RALT MOD_R_GUI>;
             bindings = <&kp RA(RGUI)>;
         };
 
         combo_r_lalt_gui {
             timeout-ms = <COMBO_MOD_TIMOUT>;
-            key-positions = <28 19>;
+            key-positions = <MOD_R_LALT MOD_R_GUI>;
             bindings = <&kp LA(RGUI)>;
         };
 
+        // Function combos
         combo_esc {
             timeout-ms = <COMBO_TIMOUT>;
             key-positions = <0 1>;
@@ -189,7 +202,7 @@
 
         combo_tab {
             timeout-ms = <COMBO_TIMOUT>;
-            key-positions = <10 11>;
+            key-positions = <20 21>;
             bindings = <&kp TAB>;
         };
 
