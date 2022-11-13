@@ -104,7 +104,7 @@
             bindings = <
             &kp Q       &kp W       &kp E           &kp R           &kp T       &kp Y       &kp U           &kp I           &kp O       &kp P
             &lhm LGUI A &lhm RALT S &lhm LCTRL D    &lhm LSHIFT F   &kp G       &kp H       &rhm RSHIFT J   &rhm RCTRL K    &rhm RALT L &rhm RGUI SEMI
-            &kp Z       &kp X       &kp C           &kp V           &kp B       &kp N       &kp M           &kp COMMA       &kp DOT     &kp SLASH
+            &kp Z       &lhm LALT X &kp C           &kp V           &kp B       &kp N       &kp M           &kp COMMA       &rhm LALT DOT     &kp SLASH
                                                 &mo SYM         &kp SPC         &kp ENTER   &mo NUM
             >;
         };
