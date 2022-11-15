@@ -9,17 +9,19 @@
 #include <dt-bindings/zmk/bt.h>
 
 // Layer definitions
-#define BASE 0
+#define DEF 0
 #define NUM 1
 #define SYM 2
 #define NAV 3
-#define FUN 4
+#define CTR 4
+#define FUN 5
 
 // Combo timeout
 #define COMBO_TIMEOUT 40
 
 // Combo keys
 #define COMBO_NAV 30 31
+#define COMBO_CTR 32 33
 
 // Thumb keys
 #define LEFT_THUMB_KEYS 30 31
@@ -46,8 +48,8 @@
             compatible = "zmk,behavior-hold-tap";
             label = "LEFT_HOMEROW_MODS";
             #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <250>;
             quick-tap-ms = <150>;
             global-quick-tap-ms = <125>;
             hold-trigger-key-positions = <RIGHT_SIDE_KEYS LEFT_THUMB_KEYS>;
@@ -59,8 +61,8 @@
             compatible = "zmk,behavior-hold-tap";
             label = "RIGHT_HOMEROW_MODS";
             #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <250>;
             quick-tap-ms = <150>;
             global-quick-tap-ms = <125>;
             hold-trigger-key-positions = <LEFT_SIDE_KEYS RIGHT_THUMB_KEYS>;
@@ -74,13 +76,13 @@
 
         combo_esc {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <0 1>;
+            key-positions = <3 4>;
             bindings = <&kp ESC>;
         };
         
         combo_tab {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <10 11>;
+            key-positions = <13 14>;
             bindings = <&kp TAB>;
         };
 
@@ -88,6 +90,12 @@
             timeout-ms = <COMBO_TIMEOUT>;
             key-positions = <COMBO_NAV>;
             bindings = <&mo NAV>;
+        };
+
+        combo_ctr{
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <COMBO_CTR>;
+            bindings = <&mo CTR>;
         };
     };
 
@@ -105,7 +113,7 @@
             &kp Q       &kp W       &kp E           &kp R           &kp T       &kp Y       &kp U           &kp I           &kp O       &kp P
             &lhm LGUI A &lhm RALT S &lhm LCTRL D    &lhm LSHIFT F   &kp G       &kp H       &rhm RSHIFT J   &rhm RCTRL K    &rhm RALT L &rhm RGUI SEMI
             &kp Z       &lhm LALT X &kp C           &kp V           &kp B       &kp N       &kp M           &kp COMMA       &rhm LALT DOT     &kp SLASH
-                                                &mo SYM         &kp SPC         &kp ENTER   &mo NUM
+                                                    &mo SYM         &kp SPC     &kp ENTER   &mo NUM
             >;
         };
 
@@ -120,7 +128,7 @@
             &trans      &kp NUM_7   &kp NUM_8   &kp NUM_9   &trans          &kp EQUAL   &kp PLUS    &kp MINUS   &kp ASTRK   &kp FSLH 
             &kp NUM_0   &kp NUM_4   &kp NUM_5   &kp NUM_6   &trans          &kp BSPC    &kp DEL     &trans      &trans      &trans
             &trans      &kp NUM_1   &kp NUM_2   &kp NUM_3   &trans          &kp UNDER   &kp MINUS   &kp COMMA   &kp DOT     &kp FSLH 
-                                                &mo FUN     &kp SPC         &kp ENTER   &trans
+                                                &mo FUN     &trans          &trans      &trans
             >;
         };
 
@@ -130,12 +138,12 @@
         // |         |         |         |         |         |      |    $    |    %    |    !    |    #    |    \    |
         //                               | PRESSED |   SPC   |      |  ENTER  |   FUN   | 
 
-        symbols_layer {
+        symbol_layer {
             bindings = <
             &trans  &trans  &trans  &trans  &trans          &dk TILDE GRAVE &kp AT          &kp AMPS        &kp PIPE        &kp CARET
             &trans  &trans  &trans  &trans  &trans          &dk APOS DQT    &dk RPAR LPAR   &dk RBRC LBRC   &dk RBKT LBKT   &dk GT LT
             &trans  &trans  &trans  &trans  &trans          &kp DOLLAR      &kp PERCENT     &kp EXCL        &kp HASH        &kp BSLH
-                                    &trans  &kp SPC         &kp ENTER       &mo FUN
+                                    &trans  &trans          &trans          &mo FUN
             >;
         };
 
@@ -145,12 +153,28 @@
         // |         |         |         |         |         |      |   Home  | Pg down |  Pg up  |   End   |  Insert |
         //                               |  COMBO  |  COMBO  |      |         |         |
 
-        nav_layer {
+        navigation_layer {
             bindings = <
             &trans  &trans  &trans  &trans  &trans          &kp K_REDO  &kp K_PASTE &kp K_COPY  &kp K_CUT   &kp K_UNDO
             &trans  &trans  &trans  &trans  &trans          &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &kp CAPS
             &trans  &trans  &trans  &trans  &trans          &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &kp INSERT
                                     &trans  &trans          &trans      &trans
+            >;
+        };
+
+        // Everything is gui modified
+        // ------------------------------------------------------------------------------------------------------------
+        // |         |    7    |    8    |    9    |         |      |         |         |         |         |         |
+        // |    0    |    4    |    5    |    6    |         |      |    <    |  SHIFT  |  CTRL   |    >    |         |
+        // |         |    1    |    2    |    3    |         |      |         |         |         |         |         |
+        //                               |         |         |      |  COMBO  |  COMBO  |
+
+        control_layer {
+            bindings = <
+            &none           &kp LG(NUM_7)   &kp LG(NUM_8)   &kp LG(NUM_9)   &trans          &trans          &trans      &trans      &trans          &trans 
+            &kp LG(NUM_0)   &kp LG(NUM_4)   &kp LG(NUM_5)   &kp LG(NUM_6)   &trans          &kp LG(LEFT)    &kp LSHIFT  &kp LCTRL   &kp LG(RIGHT)   &trans
+            &none           &kp LG(NUM_1)   &kp LG(NUM_2)   &kp LG(NUM_3)   &trans          &trans          &trans      &trans      &trans          &trans
+                                                            &trans          &trans          &trans          &trans
             >;
         };
 
@@ -160,11 +184,11 @@
         // |   F10   |    F1   |    F2   |    F3   |         |      |   BT2   |   BT5   |         |         |         |
         //                               | PRESSED |         |      |         | PRESSED |
 
-        fun_layer {
+        function_layer {
             bindings = <
             &kp F12 &kp F7  &kp F8  &kp F9  &kp PSCRN       &bt BT_SEL 0    &bt BT_SEL 3    &bt BT_CLR  &trans  &trans
-            &kp F11 &kp F4  &kp F5  &kp F6  &trans          &bt BT_SEL 1    &bt BT_SEL 4    &trans      &trans  &trans
-            &kp F10 &kp F1  &kp F2  &kp F3  &trans          &bt BT_SEL 2    &bt BT_SEL 5    &trans      &trans  &trans
+            &kp F11 &kp F4  &kp F5  &kp F6  &trans          &bt BT_SEL 1    &bt BT_SEL 4    &bt BT_NXT  &trans  &trans
+            &kp F10 &kp F1  &kp F2  &kp F3  &trans          &bt BT_SEL 2    &bt BT_SEL 5    &bt BT_PRV  &trans  &trans
                                     &trans  &trans          &trans          &trans
             >;
         };
